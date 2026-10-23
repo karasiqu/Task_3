@@ -1,5 +1,6 @@
 import allure
 from pages.main_page import MainPage
+from urls import BASE_URL, FEED_PATH
 
 @allure.feature("Основной функционал")
 class TestMain:
@@ -9,13 +10,15 @@ class TestMain:
         main = MainPage(driver)
         main.go_to_feed()
         main.go_to_constructor()
-        main.wait_url_contains("qa-stellarburgers.education-services.ru/")
+
+        assert main.get_current_url() == BASE_URL
 
     @allure.title("Переход по клику на Ленту заказов")
     def test_go_to_feed(self, driver):
         main = MainPage(driver)
         main.go_to_feed()
-        main.wait_url_contains("/feed")
+
+        assert "/feed" in main.get_current_url()
 
     @allure.title("Всплывающее окно с деталями ингредиента")
     def test_ingredient_modal(self, driver):

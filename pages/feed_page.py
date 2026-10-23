@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 from locators.feed_locators import FeedLocators
+from selenium.webdriver.support import expected_conditions as EC
 
 class FeedPage(BasePage):
 
@@ -13,4 +14,8 @@ class FeedPage(BasePage):
         self.safe_click(FeedLocators.ORDER_ITEM)
 
     def is_modal_visible(self):
-        return self.is_visible(FeedLocators.ORDER_DETAILS_MODAL)
+        try:
+            self.wait.until(EC.visibility_of_element_located(FeedLocators.ORDER_DETAILS_MODAL))
+            return True
+        except:
+            return False

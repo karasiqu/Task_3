@@ -44,3 +44,6 @@ class BasePage:
 
     def go_to_profile(self):
         self.safe_click(BaseLocators.PROFILE_BUTTON)
+
+    def get_current_url(self):
+        return self.driver.current_url
